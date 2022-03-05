@@ -14,8 +14,6 @@ function writePassword() { // function
 
 // idea, make for loop that iterates from 8 to 128 and then turn the array numbers into string
 
-var options = []; // creates empty array
-
 // var a1 = 0; // lowercase confirm
 // var a2 = 0; // uppercase confirm
 // var a3 = 0; // numeric confirm
@@ -40,6 +38,8 @@ var b3 = [1,2,3,4,5,6,7,8,9,0]; // numeric array
 var b4 = " !\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"; // special string, source: https://owasp.org/www-community/password-special-characters
 var b4 = b4.split(""); // splits each charcter into an array
 
+var options = []; // creates empty array
+
 for (var i = 8; i < 129; i++) {
     // options = options + i; this is wrong because it somehow created a 277 length array when i = 0
     options.push(i); // this is right, creates a 120 length array
@@ -52,8 +52,10 @@ var capture = [];
 function generatePassword() {
   var userChoice = Number(prompt("How many characters do you want your password to have?"));
   // found solution to the problem where prompt turns a number into a string from https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt 
-  
+
   // console.log(userChoice) // used to confirm local variable is holding number picked
+
+  capture = []; // to reset if generating another password
 
   if (!options.includes(userChoice)) { 
     alert("Pick between 8 to 128 characters not " + userChoice)
@@ -64,7 +66,7 @@ function generatePassword() {
   if (confirm("Do you want lowercase characters in your password?")) {
     // a1 = 1;
     ok.lowercase++;
-  }
+  } 
 
   if (confirm("Do you want uppercase characters in your password?")) {
     // a2 = 1;
@@ -87,17 +89,50 @@ function generatePassword() {
     return;
   }
 
-  if (ok.lowercase === 0 && ok.uppercase === 0 && ok.numeric === 1 && ok.special === 0) {
+  if (ok.lowercase === 0 && ok.uppercase === 0 && ok.numeric === 1 && ok.special === 0) { // if numeric only
     
     for (var i = 0; i < userChoice; i++) {
+      var index = Math.floor(Math.random() * b3.length);
+          capture.push(b3[index]);
+      //  console.log(index) // checks that it works
+      //  console.log(capture) // checks that it works
+    } 
+  } else if (ok.lowercase === 1 && ok.uppercase === 0 && ok.numeric === 0 && ok.special === 0) { // if lowercase only
+      for (var i = 0; i < userChoice; i++) {
+        var index = Math.floor(Math.random() * b1.length);
+            capture.push(b1[index]);
+      }
+    } else if (ok.lowercase === 0 && ok.uppercase === 1 && ok.numeric === 0 && ok.special === 0) { // if uppercase only
+        for (var i = 0; i < userChoice; i++) {
+          var index = Math.floor(Math.random() * b2.length);
+          capture.push(b2[index]);
+        }
+      } else if (ok.lowercase === 0 && ok.uppercase === 0 && ok.numeric === 0 && ok.special === 1) { // if uppercase only
+            for (var i = 0; i < userChoice; i++) {
+                var index = Math.floor(Math.random() * b4.length);
+                capture.push(b4[index]);
+            }
+        } else return;
+    
+    
+  
+  
 
-      var test = Math.floor(Math.random() * b3.length);
-      capture.push(b3[test]);
-      // console.log(test) // checks that it works
-      // console.log(capture) // checks that it works
-    }
-    
-    
+
+  if (ok.lowercase !== 0) {
+    ok.lowercase--;
+  }
+  
+  if (ok.uppercase !== 0) {
+    ok.uppercase--;
+  }
+
+  if (ok.numeric !== 0) {
+    ok.numeric--;
+  }
+
+  if (ok.special !== 0) {
+    ok.special--;
   }
 
   capture = capture.join("") // joins the array elements and turns it into a string, the opposite of split. Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/joinhttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join
