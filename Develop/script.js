@@ -112,7 +112,7 @@ function generatePassword() {
                 var index = Math.floor(Math.random() * b4.length);
                 capture.push(b4[index]);
             }
-        } else return;
+        } // Do not use return statements here otherwise the function stops if conditions not fulfilled
     
   if (ok.lowercase === 1 && ok.uppercase === 1 && ok.numeric === 0 && ok.special === 0) { // if lCase and uCase
                                                                                           // TTFF
@@ -134,7 +134,7 @@ function generatePassword() {
         var index = Math.floor(Math.random() * b3.length);
         capture.push(b3[index]);
             }
-    }
+      }
   } else if (ok.lowercase === 1 && ok.uppercase === 0 && ok.numeric === 0 && ok.special === 1) { // if lCase and special
       for (var i = 0; i < userChoice; i++) {                                                     // TFFT
         if (Math.floor(Math.random() * 2) === 0){
@@ -175,7 +175,7 @@ function generatePassword() {
             capture.push(b4[index]);
             }
         }
-      } 
+  } // Do not use return statements here otherwise the function stops if conditions not fulfilled
 
 
   if (ok.lowercase !== 0) { // to reset variables
