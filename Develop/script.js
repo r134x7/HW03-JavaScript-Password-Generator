@@ -12,20 +12,32 @@ function writePassword() { // function
   };
 }
 
- // cannot seach numbers for some reason
-
 // idea, make for loop that iterates from 8 to 128 and then turn the array numbers into string
 
 var options = []; // creates empty array
+
 var a1 = 0; // lowercase confirm
 var a2 = 0; // uppercase confirm
 var a3 = 0; // numeric confirm
 var a4 = 0; // special confirm
 
+var b1 = "byouldwvzcieahtsnqgxjkrmfp"; // lowercase string
+var b1 = b1.split(""); // splits each charcter into an array
+
+var b2 = "byouldwvzcieahtsnqgxjkrmfp"; // lowercase string
+var b2 = b2.toUpperCase(); // uppercase string, applying method to an array doesn't work for some reason
+var b2 = b2.split(""); // splits each charcter into an array
+
+var b3 = [1,2,3,4,5,6,7,8,9,0]; // numeric array
+
+var b4 = " !\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"; // special string, source: https://owasp.org/www-community/password-special-characters
+var b4 = b4.split(""); // splits each charcter into an array
+
 for (var i = 8; i < 129; i++) {
     // options = options + i; this is wrong because it somehow created a 277 length array when i = 0
     options.push(i); // this is right, creates a 120 length array
 }
+
 
 function generatePassword() {
   var userChoice = Number(prompt("How many characters do you want your password to have?"));
