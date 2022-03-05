@@ -8,7 +8,6 @@ function writePassword() { // function
     var passwordText = document.querySelector("#password");
 
     passwordText.value = password;
-    // console.log(passwordText.value)
   };
 }
 
@@ -19,12 +18,13 @@ function writePassword() { // function
 // var a3 = 0; // numeric confirm
 // var a4 = 0; // special confirm
 
-var ok = { // decided to try out making an object since it's in the course material
-  lowercase: 0,
-  uppercase: 0,
-  numeric: 0,
-  special: 0,
-};
+// var ok = { // decided to try out making an object since it's in the course material
+//   lowercase: 0,
+//   uppercase: 0,
+//   numeric: 0,
+//   special: 0,
+// };
+// commented out for debugging since I noticed I was shadowing
 
 var b1 = "byouldwvzcieahtsnqgxjkrmfp"; // lowercase string
 var b1 = b1.split(""); // splits each character into an array, source recommends not using this method for unicode characters: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split
@@ -45,9 +45,8 @@ for (var i = 8; i < 129; i++) {
     options.push(i); // this is right, creates a 120 length array
 }
 
-//var index = Math.floor(Math.random() * userChoice.length);
-
-var capture = []; // array for password output
+// var capture = []; // array for password output
+// commented out for debugging since I noticed I was shadowing
 
 function generatePassword() {
   var userChoice = Number(prompt("How many characters do you want your password to have?"));
@@ -56,11 +55,21 @@ function generatePassword() {
   // console.log(userChoice) // used to confirm local variable is holding the number picked
 
   capture = []; // to reset if generating another password
+  // console.log(capture); // used for debugging
+
+  var ok = { // decided to try out making an object since it's in the course material
+    lowercase: 0,
+    uppercase: 0,
+    numeric: 0,
+    special: 0,
+  };
+  // console.log(ok); // used for debugging
 
   if (!options.includes(userChoice)) { 
     alert("Pick between 8 to 128 characters not " + userChoice)
     generatePassword();
-    return;
+    return capture; // return statement needs capture otherwise bug occurs 
+                    //where this event occuring causes "undefined" when resetting to input a password correctly 
   }
 
   if (confirm("Do you want lowercase characters in your password?")) {
@@ -86,10 +95,11 @@ function generatePassword() {
   if (ok.lowercase === 0 && ok.uppercase === 0 && ok.numeric === 0 && ok.special === 0) { // forgot to change variables here from a1-a4 to ok
     alert("You chose no characters for your password.")
     generatePassword();
-    return;
+    return capture; // return statement needs capture otherwise bug occurs 
+                    //where this event occuring causes "undefined" when resetting to input a password correctly
   }
 
-// one characters chosen++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+// one characters chosen, four combinations possible++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
   if (ok.lowercase === 0 && ok.uppercase === 0 && ok.numeric === 1 && ok.special === 0) { // if numeric only
                                                                                           // FFTF
     for (var i = 0; i < userChoice; i++) {
@@ -115,7 +125,7 @@ function generatePassword() {
             }
         } // Do not use else return statements here otherwise the function stops if conditions not fulfilled
     
-// two characters chosen++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++        
+// two characters chosen, six combinations possible+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++        
   if (ok.lowercase === 1 && ok.uppercase === 1 && ok.numeric === 0 && ok.special === 0) { // if lCase and uCase
                                                                                           // TTFF
     for (var i = 0; i < userChoice; i++) {
@@ -170,8 +180,8 @@ function generatePassword() {
   } else if (ok.lowercase === 0 && ok.uppercase === 0 && ok.numeric === 1 && ok.special === 1) { // if num and special
         for (var i = 0; i < userChoice; i++) {                                                   // FFTT
           if (Math.floor(Math.random() * 2) === 0){
-            var index = Math.floor(Math.random() * b2.length);
-            capture.push(b2[index]);
+            var index = Math.floor(Math.random() * b3.length);
+            capture.push(b3[index]);
           } else {
             var index = Math.floor(Math.random() * b4.length);
             capture.push(b4[index]);
@@ -179,7 +189,7 @@ function generatePassword() {
         }
   } // Do not use else return statements here otherwise the function stops if conditions not fulfilled
 
-// three characters chosen++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// three characters chosen, four combinations possible++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 if (ok.lowercase === 1 && ok.uppercase === 1 && ok.numeric === 1 && ok.special === 0) { // if lCase, uCase and num
                                                                                         // TTTF
   for (var i = 0; i < userChoice; i++) {
@@ -239,7 +249,7 @@ if (ok.lowercase === 1 && ok.uppercase === 1 && ok.numeric === 1 && ok.special =
       } // Do not use else return statements here otherwise the function stops if conditions not fulfilled
 
 
-// four characters chosen++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// four characters chosen, two combinations possible++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     if (ok.lowercase === 1 && ok.uppercase === 1 && ok.numeric === 1 && ok.special === 1) { // if all is true
                                                                                             // TTTT
         for (var i = 0; i < userChoice; i++) {
@@ -260,23 +270,26 @@ if (ok.lowercase === 1 && ok.uppercase === 1 && ok.numeric === 1 && ok.special =
       } // Do not use else return statements here otherwise the function stops if conditions not fulfilled
 
 // reset variables
-  if (ok.lowercase !== 0) { // to reset variables
-    ok.lowercase--;
-  }
+  // if (ok.lowercase !== 0) { // to reset variables
+  //   ok.lowercase--;
+  // }
   
-  if (ok.uppercase !== 0) { // to reset variables
-    ok.uppercase--;
-  }
+  // if (ok.uppercase !== 0) { // to reset variables
+  //   ok.uppercase--;
+  // }
 
-  if (ok.numeric !== 0) { // to reset variables
-    ok.numeric--;
-  }
+  // if (ok.numeric !== 0) { // to reset variables
+  //   ok.numeric--;
+  // }
 
-  if (ok.special !== 0) { // to reset variables
-    ok.special--;
-  }
+  // if (ok.special !== 0) { // to reset variables
+  //   ok.special--;
+  // }
 
+  // console.log(ok); // used for debugging
+  // console.log(capture); // used for debugging
   capture = capture.join("") // joins the array elements and turns it into a string, the opposite of split. Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/joinhttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join
+  // console.log(capture); // used for debugging
   return capture;
 }
 
