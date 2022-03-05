@@ -47,13 +47,13 @@ for (var i = 8; i < 129; i++) {
 
 //var index = Math.floor(Math.random() * userChoice.length);
 
-var capture = [];
+var capture = []; // array for password output
 
 function generatePassword() {
   var userChoice = Number(prompt("How many characters do you want your password to have?"));
   // found solution to the problem where prompt turns a number into a string from https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt 
 
-  // console.log(userChoice) // used to confirm local variable is holding number picked
+  // console.log(userChoice) // used to confirm local variable is holding the number picked
 
   capture = []; // to reset if generating another password
 
@@ -90,7 +90,7 @@ function generatePassword() {
   }
 
   if (ok.lowercase === 0 && ok.uppercase === 0 && ok.numeric === 1 && ok.special === 0) { // if numeric only
-    
+                                                                                          // FFTF
     for (var i = 0; i < userChoice; i++) {
       var index = Math.floor(Math.random() * b3.length);
           capture.push(b3[index]);
@@ -98,40 +98,99 @@ function generatePassword() {
       //  console.log(capture) // checks that it works
     } 
   } else if (ok.lowercase === 1 && ok.uppercase === 0 && ok.numeric === 0 && ok.special === 0) { // if lowercase only
-      for (var i = 0; i < userChoice; i++) {
+      for (var i = 0; i < userChoice; i++) {                                                     // TFFF
         var index = Math.floor(Math.random() * b1.length);
             capture.push(b1[index]);
       }
     } else if (ok.lowercase === 0 && ok.uppercase === 1 && ok.numeric === 0 && ok.special === 0) { // if uppercase only
-        for (var i = 0; i < userChoice; i++) {
+        for (var i = 0; i < userChoice; i++) {                                                     // FTFF
           var index = Math.floor(Math.random() * b2.length);
           capture.push(b2[index]);
         }
       } else if (ok.lowercase === 0 && ok.uppercase === 0 && ok.numeric === 0 && ok.special === 1) { // if uppercase only
-            for (var i = 0; i < userChoice; i++) {
+            for (var i = 0; i < userChoice; i++) {                                                   // FFFT
                 var index = Math.floor(Math.random() * b4.length);
                 capture.push(b4[index]);
             }
         } else return;
     
-    
-  
-  
+  if (ok.lowercase === 1 && ok.uppercase === 1 && ok.numeric === 0 && ok.special === 0) { // if lCase and uCase
+                                                                                          // TTFF
+    for (var i = 0; i < userChoice; i++) {
+      if (Math.floor(Math.random() * 2) === 0){
+        var index = Math.floor(Math.random() * b1.length);
+        capture.push(b1[index]);
+      } else {
+        var index = Math.floor(Math.random() * b2.length);
+        capture.push(b2[index]);
+            }
+      } 
+  } else if (ok.lowercase === 1 && ok.uppercase === 0 && ok.numeric === 1 && ok.special === 0) { // if lCase and num
+      for (var i = 0; i < userChoice; i++) {                                                     // TFTF
+        if (Math.floor(Math.random() * 2) === 0){
+          var index = Math.floor(Math.random() * b1.length);
+          capture.push(b1[index]);
+        } else {
+        var index = Math.floor(Math.random() * b3.length);
+        capture.push(b3[index]);
+            }
+    }
+  } else if (ok.lowercase === 1 && ok.uppercase === 0 && ok.numeric === 0 && ok.special === 1) { // if lCase and special
+      for (var i = 0; i < userChoice; i++) {                                                     // TFFT
+        if (Math.floor(Math.random() * 2) === 0){
+          var index = Math.floor(Math.random() * b1.length);
+          capture.push(b1[index]);
+        } else {
+        var index = Math.floor(Math.random() * b4.length);
+        capture.push(b4[index]);
+            }
+      }
+  } else if (ok.lowercase === 0 && ok.uppercase === 1 && ok.numeric === 1 && ok.special === 0) { // if uCase and num
+      for (var i = 0; i < userChoice; i++) {                                                     // FTTF
+        if (Math.floor(Math.random() * 2) === 0){
+          var index = Math.floor(Math.random() * b2.length);
+          capture.push(b2[index]);
+        } else {
+          var index = Math.floor(Math.random() * b3.length);
+          capture.push(b3[index]);
+        }
+      }
+  } else if (ok.lowercase === 0 && ok.uppercase === 1 && ok.numeric === 0 && ok.special === 1) { // if uCase and special
+      for (var i = 0; i < userChoice; i++) {                                                     // FTFT
+        if (Math.floor(Math.random() * 2) === 0){
+          var index = Math.floor(Math.random() * b2.length);
+          capture.push(b2[index]);
+        } else {
+          var index = Math.floor(Math.random() * b4.length);
+          capture.push(b4[index]);
+        }
+      }
+  } else if (ok.lowercase === 0 && ok.uppercase === 0 && ok.numeric === 1 && ok.special === 1) { // if num and special
+        for (var i = 0; i < userChoice; i++) {                                                   // FFTT
+          if (Math.floor(Math.random() * 2) === 0){
+            var index = Math.floor(Math.random() * b2.length);
+            capture.push(b2[index]);
+          } else {
+            var index = Math.floor(Math.random() * b4.length);
+            capture.push(b4[index]);
+            }
+        }
+      } 
 
 
-  if (ok.lowercase !== 0) {
+  if (ok.lowercase !== 0) { // to reset variables
     ok.lowercase--;
   }
   
-  if (ok.uppercase !== 0) {
+  if (ok.uppercase !== 0) { // to reset variables
     ok.uppercase--;
   }
 
-  if (ok.numeric !== 0) {
+  if (ok.numeric !== 0) { // to reset variables
     ok.numeric--;
   }
 
-  if (ok.special !== 0) {
+  if (ok.special !== 0) { // to reset variables
     ok.special--;
   }
 
