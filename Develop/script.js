@@ -89,6 +89,7 @@ function generatePassword() {
     return;
   }
 
+// one characters chosen++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
   if (ok.lowercase === 0 && ok.uppercase === 0 && ok.numeric === 1 && ok.special === 0) { // if numeric only
                                                                                           // FFTF
     for (var i = 0; i < userChoice; i++) {
@@ -112,8 +113,9 @@ function generatePassword() {
                 var index = Math.floor(Math.random() * b4.length);
                 capture.push(b4[index]);
             }
-        } // Do not use return statements here otherwise the function stops if conditions not fulfilled
+        } // Do not use else return statements here otherwise the function stops if conditions not fulfilled
     
+// two characters chosen++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++        
   if (ok.lowercase === 1 && ok.uppercase === 1 && ok.numeric === 0 && ok.special === 0) { // if lCase and uCase
                                                                                           // TTFF
     for (var i = 0; i < userChoice; i++) {
@@ -175,9 +177,89 @@ function generatePassword() {
             capture.push(b4[index]);
             }
         }
-  } // Do not use return statements here otherwise the function stops if conditions not fulfilled
+  } // Do not use else return statements here otherwise the function stops if conditions not fulfilled
+
+// three characters chosen++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+if (ok.lowercase === 1 && ok.uppercase === 1 && ok.numeric === 1 && ok.special === 0) { // if lCase, uCase and num
+                                                                                        // TTTF
+  for (var i = 0; i < userChoice; i++) {
+    if (Math.floor(Math.random() * 3) === 0){
+      var index = Math.floor(Math.random() * b1.length);
+      capture.push(b1[index]);
+    } else if (Math.floor(Math.random() * 3) === 1) {
+      var index = Math.floor(Math.random() * b2.length);
+      capture.push(b2[index]);
+      } else { 
+          var index = Math.floor(Math.random() * b3.length);
+          capture.push(b3[index]);
+        }
+  } 
+} else if (ok.lowercase === 1 && ok.uppercase === 1 && ok.numeric === 0 && ok.special === 1) { // if lCase, uCase and special
+                                                                                               // TTFT
+    for (var i = 0; i < userChoice; i++) {
+      if (Math.floor(Math.random() * 3) === 0){
+        var index = Math.floor(Math.random() * b1.length);
+        capture.push(b1[index]);
+      } else if (Math.floor(Math.random() * 3) === 1) {
+        var index = Math.floor(Math.random() * b2.length);
+        capture.push(b2[index]);
+        } else { 
+            var index = Math.floor(Math.random() * b4.length);
+            capture.push(b4[index]);
+          }
+    } 
+  } else if (ok.lowercase === 1 && ok.uppercase === 0 && ok.numeric === 1 && ok.special === 1) { // if lCase, num and special
+                                                                                                 // TFTT
+      for (var i = 0; i < userChoice; i++) {
+        if (Math.floor(Math.random() * 3) === 0){
+          var index = Math.floor(Math.random() * b1.length);
+          capture.push(b1[index]);
+        } else if (Math.floor(Math.random() * 3) === 1) {
+            var index = Math.floor(Math.random() * b3.length);
+            capture.push(b3[index]);
+          } else { 
+                  var index = Math.floor(Math.random() * b4.length);
+                  capture.push(b4[index]);
+                }
+      } 
+  } else if (ok.lowercase === 0 && ok.uppercase === 1 && ok.numeric === 1 && ok.special === 1) { // if uCase, num and special
+                                                                                                 // FTTT
+        for (var i = 0; i < userChoice; i++) {
+            if (Math.floor(Math.random() * 3) === 0){
+              var index = Math.floor(Math.random() * b2.length);
+              capture.push(b2[index]);
+            } else if (Math.floor(Math.random() * 3) === 1) {
+                var index = Math.floor(Math.random() * b3.length);
+                capture.push(b3[index]);
+            } else { 
+                    var index = Math.floor(Math.random() * b4.length);
+                    capture.push(b4[index]);
+                }
+          } 
+      } // Do not use else return statements here otherwise the function stops if conditions not fulfilled
 
 
+// four characters chosen++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    if (ok.lowercase === 1 && ok.uppercase === 1 && ok.numeric === 1 && ok.special === 1) { // if all is true
+                                                                                            // TTTT
+        for (var i = 0; i < userChoice; i++) {
+            if (Math.floor(Math.random() * 4) === 0){
+                var index = Math.floor(Math.random() * b1.length);
+                capture.push(b1[index]);
+            } else if (Math.floor(Math.random() * 4) === 1) {
+                var index = Math.floor(Math.random() * b2.length);
+                capture.push(b2[index]);
+              } else if (Math.floor(Math.random() * 4) === 2) {
+                var index = Math.floor(Math.random() * b3.length);
+                capture.push(b3[index]);
+                } else { 
+                    var index = Math.floor(Math.random() * b4.length);
+                    capture.push(b4[index]);
+                  }
+          } 
+      } // Do not use else return statements here otherwise the function stops if conditions not fulfilled
+
+// reset variables
   if (ok.lowercase !== 0) { // to reset variables
     ok.lowercase--;
   }
